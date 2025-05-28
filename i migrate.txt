@@ -1,0 +1,50 @@
+i-migrate
+this is a cli app built with rust to migrate data from a web2 database to ipfs. organizing the data.
+this project also includes a webapp that provides a ui for non-techy to use. 
+
+how it works 
+.you install the package (the package is supported in ruby, rust, javascript, and python environment)
+.you create a json file that store your database credentials (imigrate-config.json)
+.you connect to your wallet via cli (for security opens url to wagmi wallet connect, pass callback to cli axium).
+.you run i-migrate migrate data (to start database migration. read imigrate-config.json to  get credentails and start migration)
+.a json file is created that stores cid data (cid.json).
+
+sign user
+database migrate
+migrate status
+-------------------------
+define functions like
+-connect wallet [prompt user to connect wallet y/n, select wallet => open browser with the wallet selected, user connect then you store signer details]  
+---process: {
+create a webapp that uses wagmi to connect wallet,
+on user propmt (yes) use webbrowser library to open the app,
+connect using wagmi,
+get callback (pass the data to the cli app)
+}----
+-get data from database [get table => store table in object, and create ipfs for tables then store cid in json / get table content => loop through and chuck it by 5000 the store in ipfs => store cid in json] 'validate signer'
+---process: {
+function checker init => {
+checkes for signer(a json file) if it exit => call the migrate function else raise error(user not connected or recognized (use i-mirate connect-wallet to connect wallet).
+},
+function migrate init => {
+read through json file for db_credentials, use sqlx to get all tables in database, store table data in object, call ipfs-create with params(table_data_object).
+},
+function ipfs create_table => {
+get param, create ipfs for tables and schema, get and store cid in json, calls migrate_table_content function(_param).
+},
+function migrate_table_content =>{
+map through param, 
+check if table content is true ? query database to  get content under the table and create ipfs, update json file with cid for content under the table : move to the next in the object
+.}
+}
+-get status gets cid from json files and display
+--process: {
+reads json file and render  data 
+}
+-terminate clears the json file.
+-------------------------
+
+
+
+
+
