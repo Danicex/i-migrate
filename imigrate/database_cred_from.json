@@ -1,0 +1,10 @@
+{
+  "db_type": "post==pooin",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "password",
+  "database_name": "source_db",
+  "database_url": "postgres://postgres:password@localhost/source_db",
+  "ssl_enabled": false
+}
